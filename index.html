@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Yohannes Melaku Portfolio</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        color: white;
+        overflow-x: hidden;
+    }
+
+    /* NAVBAR */
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        padding: 18px 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(12px);
+    }
+
+    nav h2 {
+        font-size: 24px;
+        letter-spacing: 1px;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 18px;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: white;
+        padding: 9px 14px;
+        border-radius: 8px;
+        transition: 0.3s ease;
+        font-weight: 600;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+        background: white;
+        color: black;
+        transform: translateY(-2px);
+    }
+
+    /* SECTIONS */
+    section {
+        min-height: 100vh;
+        padding: 120px 60px 70px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        transition: background 0.8s ease;
+        position: relative;
+    }
+
+    section h2 {
+        font-size: 40px;
+        margin-bottom: 25px;
+    }
+
+    section p {
+        line-height: 1.8;
+        font-size: 18px;
+    }
+
+    /* HOME */
+    #home {
+        background: linear-gradient(135deg, #0f172a, #1d4ed8);
+        align-items: center;
+        text-align: center;
+    }
+
+    #home h1 {
+        font-size: 64px;
+        margin-bottom: 12px;
+        animation: fadeUp 1s ease forwards;
+    }
+
+    #typing {
+        font-size: 26px;
+        color: #7dd3fc;
+        min-height: 34px;
+        margin-bottom: 25px;
+        font-weight: 600;
+    }
+
+    .btn {
+        display: inline-block;
+        border: none;
+        padding: 13px 28px;
+        border-radius: 10px;
+        background: #38bdf8;
+        color: black;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.3s ease;
+        text-decoration: none;
+    }
+
+    .btn:hover {
+        background: white;
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(255,255,255,0.15);
+    }
+
+    /* ABOUT */
+    #about {
+        background: linear-gradient(135deg, #111827, #4c1d95);
+    }
+
+    .about-container {
+        display: flex;
+        align-items: center;
+        gap: 35px;
+        flex-wrap: wrap;
+    }
+
+    .about-container img {
+        width: 280px;
+        max-width: 100%;
+        border-radius: 18px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.35);
+        transition: 0.4s ease;
+    }
+
+    .about-container img:hover {
+        transform: scale(1.03);
+    }
+
+    .about-text {
+        flex: 1;
+        min-width: 280px;
+    }
+
+    .about-text p {
+        max-width: 850px;
+    }
+
+    /* SERVICES */
+    #services {
+        background: linear-gradient(135deg, #082f49, #0f766e);
+    }
+
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 22px;
+        margin-top: 10px;
+    }
+
+    .card {
+        background: rgba(255,255,255,0.08);
+        padding: 24px;
+        border-radius: 18px;
+        backdrop-filter: blur(8px);
+        transition: 0.35s ease;
+        border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        background: rgba(255,255,255,0.16);
+    }
+
+    .card h3 {
+        margin-bottom: 12px;
+        font-size: 22px;
+    }
+
+    .card p {
+        font-size: 16px;
+    }
+
+    /* SKILLS */
+    #skills {
+        background: linear-gradient(135deg, #3b0764, #7c2d12);
+    }
+
+    .skills-wrap {
+        max-width: 900px;
+    }
+
+    .skill {
+        margin: 18px 0 8px;
+        font-size: 18px;
+        font-weight: 600;
+    }
+
+    .bar {
+        width: 100%;
+        height: 12px;
+        border-radius: 999px;
+        background: rgba(255,255,255,0.18);
+        overflow: hidden;
+        margin-bottom: 18px;
+    }
+
+    .bar div {
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #38bdf8, #22c55e);
+    }
+
+    .skills-text {
+        margin-bottom: 20px;
+        max-width: 900px;
+    }
+
+    /* CONTACT */
+    #contact {
+        background: linear-gradient(135deg, #1f2937, #7f1d1d);
+    }
+
+    .contact-container {
+        display: flex;
+        gap: 50px;
+        flex-wrap: wrap;
+        align-items: flex-start;
+    }
+
+    .contact-details {
+        flex: 1;
+        min-width: 280px;
+    }
+
+    .contact-details h3 {
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+
+    .contact-details p {
+        margin-bottom: 10px;
+        color: #d1d5db;
+    }
+
+    form {
+        max-width: 500px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        flex: 1;
+        min-width: 300px;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 14px 16px;
+        border: none;
+        border-radius: 10px;
+        outline: none;
+        font-size: 16px;
+    }
+
+    textarea {
+        resize: none;
+        min-height: 140px;
+    }
+
+    /* FOOTER */
+    footer {
+        padding: 30px;
+        text-align: center;
+        background: #000;
+        color: #9ca3af;
+        border-top: 1px solid #333;
+    }
+
+    /* BACK TO TOP */
+    #topBtn {
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        border: none;
+        background: #38bdf8;
+        color: black;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+        display: none;
+        z-index: 999;
+        transition: 0.3s ease;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    }
+
+    #topBtn:hover {
+        transform: translateY(-4px);
+        background: white;
+    }
+
+    /* SCROLL ANIMATION - SPEED ADJUSTED TO 0.5s FOR SNAPPY FEEL */
+    .fade-section {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: 0.5s ease; 
+    }
+
+    .fade-section.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    @keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+        nav {
+            padding: 16px 20px;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        nav ul {
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        section {
+            padding: 140px 22px 60px;
+        }
+
+        #home h1 {
+            font-size: 42px;
+        }
+
+        #typing {
+            font-size: 20px;
+        }
+
+        section h2 {
+            font-size: 32px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<nav>
+    <h2>Portfolio</h2>
+    <ul>
+        <li><a href="#home" class="nav-link active">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#services" class="nav-link">Service</a></li>
+        <li><a href="#skills" class="nav-link">Skill</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+    </ul>
+</nav>
+
+<section id="home" class="fade-section show">
+    <h1>Hello, I am Yohannes Melaku</h1>
+    <div id="typing"></div>
+    <a href="#contact" class="btn">Contact Me</a>
+</section>
+
+<section id="about" class="fade-section">
+    <h2>About Me</h2>
+    <div class="about-container">
+        <img src="image.jpg" alt="Yohannes Melaku">
+        <div class="about-text">
+            <p>
+                I am Yohannes Melaku, a passionate frontend developer who enjoys turning ideas into beautiful,
+                responsive, and user-friendly websites. I focus on creating modern web interfaces that are simple,
+                elegant, and easy to use. I like building pages that not only look good but also feel smooth and
+                professional when people interact with them.
+            </p>
+            <br>
+            <p>
+                My goal is to continue improving my web development skills and create projects that show creativity,
+                clean structure, and strong design thinking. I am interested in learning more about advanced frontend
+                techniques, animation effects, and making websites that work well on all screen sizes.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="services" class="fade-section">
+    <h2>My Services</h2>
+    <div class="cards">
+        <div class="card">
+            <h3>Web Design</h3>
+            <p>I design attractive and modern website layouts that match the purpose of the project and give users a clean experience.</p>
+        </div>
+        <div class="card">
+            <h3>Frontend Development</h3>
+            <p>I build responsive frontend interfaces using HTML, CSS, and JavaScript with smooth animations and good structure.</p>
+        </div>
+        <div class="card">
+            <h3>Responsive Layouts</h3>
+            <p>I make websites work well on mobile, tablet, laptop, and desktop screens so every visitor has a great experience.</p>
+        </div>
+    </div>
+</section>
+
+<section id="skills" class="fade-section">
+    <h2>My Creative Skills</h2>
+    <div class="skills-wrap">
+        <p class="skills-text">
+            I have developed a strong interest in frontend development and creative web design. My skills allow me
+            to build websites that look polished, feel interactive, and load in a simple, efficient way. I enjoy
+            combining design and logic to create pages that communicate clearly and leave a strong impression.
+            I also like experimenting with animations, transitions, and visual balance to make every project feel alive.
+        </p>
+
+        <div class="skill">HTML - 90%</div>
+        <div class="bar"><div style="width: 90%"></div></div>
+
+        <div class="skill">CSS - 85%</div>
+        <div class="bar"><div style="width: 85%"></div></div>
+
+        <div class="skill">JavaScript - 75%</div>
+        <div class="bar"><div style="width: 75%"></div></div>
+
+        <div class="skill">Responsive Design - 88%</div>
+        <div class="bar"><div style="width: 88%"></div></div>
+
+        <button class="btn" onclick="location.reload()">Read More</button>
+    </div>
+</section>
+
+<section id="contact" class="fade-section">
+    <h2>Contact Me</h2>
+    <div class="contact-container">
+        <form onsubmit="reloadPage(event)">
+            <input type="text" placeholder="Your Name" required />
+            <input type="email" placeholder="Email" required />
+            <input type="text" placeholder="Subject" />
+            <textarea placeholder="Message"></textarea>
+            <button class="btn" type="submit">Send Message</button>
+        </form>
+        <div class="contact-details">
+            <h3>Please contact and support me</h3>
+            <p><strong>📍 Address:</strong> Bole, Addis Ababa, Ethiopia</p>
+            <p><strong>📞 Phone:</strong> +251 912 345 678</p>
+            <p><strong>📧 Email:</strong> yohannes.melaku@example.com</p>
+        </div>
+    </div>
+</section>
+
+<footer>
+    &copy; 2026 Yohannes Melaku. All Rights Reserved.
+</footer>
+
+<button id="topBtn" onclick="scrollToTop()">↑</button>
+
+<script>
+    const text = "I am a Frontend Developer";
+    let index = 0;
+
+    function typeWriter() {
+        if (index < text.length) {
+            document.getElementById("typing").innerHTML += text.charAt(index);
+            index++;
+            setTimeout(typeWriter, 70);
+        }
+    }
+    typeWriter();
+
+    const sections = document.querySelectorAll(".fade-section");
+    const navLinks = document.querySelectorAll(".nav-link");
+    const topBtn = document.getElementById("topBtn");
+
+    function activateSection() {
+        let scrollPos = window.scrollY + 220;
+
+        sections.forEach(section => {
+            if (scrollPos >= section.offsetTop) {
+                section.classList.add("show");
+            }
+        });
+
+        topBtn.style.display = window.scrollY > 300 ? "block" : "none";
+
+        navLinks.forEach(link => {
+            link.classList.remove("active");
+            const target = document.querySelector(link.getAttribute("href"));
+            if (target && scrollPos >= target.offsetTop && scrollPos < target.offsetTop + target.offsetHeight) {
+                link.classList.add("active");
+            }
+        });
+    }
+
+    window.addEventListener("scroll", activateSection);
+    window.addEventListener("load", activateSection);
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }
+
+    function reloadPage(event) {
+        event.preventDefault();
+        location.reload();
+    }
+</script>
+
+</body>
+</html>
